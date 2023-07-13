@@ -5,7 +5,6 @@ require('isomorphic-fetch');
 
 function addDestinationInfo(document, name, diameter, star, distance, moons, imageUrl) {
     let missionTarget = document.getElementById('missionTarget');
-    for (let i=0; i<planets.length; i++){
         missionTarget.innerHTML += `
         <h2>Mission Destination</h2>
                 <ol>
@@ -17,8 +16,6 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
                 </ol>
                 <img src="${imageUrl}">
         `
-    }
-
 }
 
 function validateInput(testInput) {
@@ -37,7 +34,6 @@ function validateInput(testInput) {
 }
 
 function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
-   let faultyItems = document.getElementById('faultyItems');
    let pilotStatus = document.getElementById('pilotStatus');
    let copilotStatus = document.getElementById('copilotStatus');
    let fuelStatus = document.getElementById('fuelStatus');
