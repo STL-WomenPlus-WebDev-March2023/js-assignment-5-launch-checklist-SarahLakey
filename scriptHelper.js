@@ -9,28 +9,15 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
         missionTarget.innerHTML += `
         <h2>Mission Destination</h2>
                 <ol>
-                    <li>Name: </li>
-                    <li>Diameter: </li>
+                    <li>Name: ${name}</li>
+                    <li>Diameter: ${diameter}</li>
                     <li>Star: ${star}</li>
-                    <li>Distance from Earth: </li>
-                    <li>Number of Moons: </li>
+                    <li>Distance from Earth: ${distance}</li>
+                    <li>Number of Moons: ${moons}</li>
                 </ol>
-                <img src="">
+                <img src="${imageUrl}">
         `
     }
-
-   // Here is the HTML formatting for our mission target div.
-   /*
-                <h2>Mission Destination</h2>
-                <ol>
-                    <li>Name: </li>
-                    <li>Diameter: </li>
-                    <li>Star: ${star}</li>
-                    <li>Distance from Earth: </li>
-                    <li>Number of Moons: </li>
-                </ol>
-                <img src="">
-   */
 
 }
 
@@ -50,7 +37,7 @@ function validateInput(testInput) {
 }
 
 function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
-   let list = document.getElementById('faultyItems');
+   let faultyItems = document.getElementById('faultyItems');
    let pilotStatus = document.getElementById('pilotStatus');
    let copilotStatus = document.getElementById('copilotStatus');
    let fuelStatus = document.getElementById('fuelStatus');
@@ -65,18 +52,18 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
    } else if( validateInput(pilot) === "Is a Number" || validateInput(copilot) === "Is a Number" || validateInput(fuelLevel) === "Not a Number" || validateInput(cargoLevel) === "Not a Number") {
    alert("Please enter valid input for each field.")
    } else {
-    list.style.visibility = "visible"
+    faultyItems.style.visibility = "visible"
     pilotStatus.innerHTML = `Pilot ${pilotName}: Ready`
     copilotStatus.innerHTML = `CoPilot ${copilotName}: Ready`
    }
    if(validateInput(fuelLevel) < 10000){
-    list.style.visibility = "visible"
+    faultyItems.style.visibility = "visible"
     fuelStatus.innerHTML = `Fuel Level is at ${fuelLevel}. There is not enough fuel for the journey.`
     launchStatus.innerHTML = `Shuttle not ready for launch.`
     launchStatusCheck.text = red; 
    } 
    if (validateInput(cargoLevel) > 10000){
-    list.style.visibility = "visible"
+    faultyItems.style.visibility = "visible"
     cargoStatus.innerHTML = `Cargo Level is at ${cargoLevel}. There is too much mass for the shuttle to take off.`
     launchStatus.innerHTML = `Shuttle not ready for launch.`
     launchStatusCheck.text = red; 
@@ -91,18 +78,21 @@ async function myFetch() {
     let planetsReturned;
 
     planetsReturned = await fetch("https://handlers.education.launchcode.org/static/planets.json").then( function(response) {
-        response.json().then(function(json){
-            console.log(planetsReturned)
-         });
-        });
+           
+                if (response.status >= 400) {
+                  throw Error ("Bad response from network.")
+                  } else {
+                    return response.json()
+                }
+
+              })
 
     return planetsReturned;
-}
+};
 
 function pickPlanet(planets) {
     let chosenPlanet = planets[Math.floor(Math.random()*planets.length)];
     return chosenPlanet
-
 }
 
 module.exports.addDestinationInfo = addDestinationInfo;
