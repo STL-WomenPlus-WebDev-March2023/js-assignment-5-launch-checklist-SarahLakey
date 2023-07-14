@@ -1,6 +1,6 @@
 // Write your JavaScript code here!
 
-//onst { myFetch } = require("./scriptHelper");
+// const { myFetch } = require("./scriptHelper");
 
 window.addEventListener("load", function() {
 
@@ -26,7 +26,7 @@ window.addEventListener("load", function() {
         let pilotNameInput = document.querySelector("input[name=pilotName]");
         let copilotNameInput = document.querySelector("input[name=copilotName]");
         let fuelLevelInput = document.querySelector("input[name=fuelLevel]");
-        let cargoLevelInput = document.querySelector("input[name=cargoLevel]");
+        let cargoLevelInput = document.querySelector("input[name=cargoMass]");
 
         let pilot = pilotNameInput.value;
         let copilot= copilotNameInput.value;
