@@ -113,6 +113,8 @@ function pickPlanet(planets) {
     return chosenPlanet
 }
 
+
+
 module.exports.addDestinationInfo = addDestinationInfo;
 module.exports.validateInput = validateInput;
 module.exports.formSubmission = formSubmission;
